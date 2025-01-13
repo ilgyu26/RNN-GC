@@ -8,12 +8,12 @@ except:
     import pickle
 import numpy as np
 
-from keras.models import Sequential
-from keras.optimizers import RMSprop, Adam, Adagrad
-from keras.layers import Dense, Dropout, Activation, Embedding
-from keras.layers import LSTM, SimpleRNN, GRU
-from keras.regularizers import l1, l2
-from keras.callbacks import EarlyStopping
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import RMSprop, Adam, Adagrad
+from tensorflow.keras.layers import Dense, Dropout, Activation, Embedding
+from tensorflow.keras.layers import LSTM, SimpleRNN, GRU
+from tensorflow.keras.regularizers import l1, l2
+from tensorflow.keras.callbacks import EarlyStopping
 
 
 class CustomLSTM(object):
@@ -23,19 +23,19 @@ class CustomLSTM(object):
 
         self.model = Sequential()
 
-        self.model.add(LSTM(output_dim=num_hidden, input_dim=(None, num_channel), kernel_regularizer=l1(weight_decay),
+        self.model.add(LSTM(units=num_hidden, input_shape=(None, num_channel), kernel_regularizer=l1(weight_decay),
                             recurrent_regularizer=l1(weight_decay)))
         self.model.add(Dense(1))
         self.model.summary()
 
-        rms_prop = RMSprop(lr=0.001, rho=0.9, epsilon=1e-6)
+        rms_prop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-6)
 
-        # adam = Adam(lr=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-8)
+        # adam = Adam(learning_rate=0.01, beta_1=0.9, beta_2=0.999, epsilon=1e-8)
         # adagrad = Adagrad(lr=0.1, epsilon=1e-5)
         self.model.compile(loss='mean_squared_error', optimizer=rms_prop)
 
     def fit(self, x, y, batch_size=10, epochs=100):
-        early_stopping = EarlyStopping(monitor='val_loss', patience=5)
+        early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
         hist = self.model.fit(x, y,
                               batch_size=batch_size,
                               epochs=epochs,
