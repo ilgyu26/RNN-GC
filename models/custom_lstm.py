@@ -23,8 +23,8 @@ class CustomLSTM(object):
 
         self.model = Sequential()
 
-        self.model.add(LSTM(output_dim=num_hidden, input_dim=num_channel, W_regularizer=l1(weight_decay),
-                            U_regularizer=l1(weight_decay)))
+        self.model.add(LSTM(output_dim=num_hidden, input_dim=(None, num_channel), kernel_regularizer=l1(weight_decay),
+                            recurrent_regularizer=l1(weight_decay)))
         self.model.add(Dense(1))
         self.model.summary()
 
