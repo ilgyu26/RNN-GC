@@ -28,7 +28,7 @@ class RNN_GC(object):
 
     def load_sequence_data(self):
         simulation_name = 'realization_' + self.mode + '_' + str(self.data_length) + '.mat'
-        simulation_dir = 'simulation_difflen'
+        simulation_dir = '/content/RNN-GC/simulation_difflen'
         simulation_name = os.path.join(simulation_dir, simulation_name)
         simulation_data = sio.loadmat(simulation_name)
 
