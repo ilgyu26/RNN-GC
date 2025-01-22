@@ -8,12 +8,12 @@ except:
     import pickle
 import numpy as np
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.optimizers import RMSprop, Adam, Adagrad
-from tensorflow.keras.layers import Dense, Dropout, Activation, Embedding
-from tensorflow.keras.layers import LSTM, SimpleRNN, GRU
-from tensorflow.keras.regularizers import l1, l2
-from tensorflow.keras.callbacks import EarlyStopping
+from keras.models import Sequential
+from keras.optimizers import RMSprop, Adam, Adagrad
+from keras.layers import Dense, Dropout, Activation, Embedding
+from keras.layers import LSTM, SimpleRNN, GRU
+from keras.regularizers import l1, l2
+from keras.callbacks import EarlyStopping
 
 
 class CustomLSTM(object):
